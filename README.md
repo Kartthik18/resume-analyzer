@@ -1,4 +1,4 @@
-# 📄 ResumeAI — AI Resume Analyzer + Interview Coach
+#  ResumeAI — AI Resume Analyzer + Interview Coach
 
 A full-stack MERN application that uses **Google Gemini AI** to analyze resumes and provide:
 -  ATS compatibility score
@@ -11,20 +11,20 @@ A full-stack MERN application that uses **Google Gemini AI** to analyze resumes 
 
 ---
 
-## 🏗️ Tech Stack
+##  Tech Stack
 
 | Layer | Tech |
 |-------|------|
 | Frontend | React (Vite), Tailwind CSS, Axios, React Router |
 | Backend | Node.js, Express.js |
 | Database | MongoDB + Mongoose |
-| AI | Google Gemini 1.5 Flash |
+| AI | Google Gemini 3.5 Flash |
 | Auth | JWT + bcryptjs |
 | File Upload | multer + pdf-parse |
 
 ---
 
-## 📁 Folder Structure
+##  Folder Structure
 
 ```
 Resume Analyzer/
@@ -62,7 +62,7 @@ Resume Analyzer/
 
 ---
 
-## ⚡ Quick Start
+##  Quick Start
 
 ### 1. Clone / Open the project
 
@@ -100,8 +100,8 @@ npm run dev
 
 You should see:
 ```
-✅ MongoDB connected successfully
-🚀 Server running at http://localhost:5000
+ MongoDB connected successfully
+ Server running at http://localhost:5000
 ```
 
 ### 3. Set up the Frontend
@@ -118,7 +118,7 @@ Visit: **http://localhost:5173**
 
 ---
 
-## 🔑 Getting a Gemini API Key (Free)
+##  Getting a Gemini API Key (Free)
 
 1. Go to [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
 2. Sign in with your Google account
@@ -127,7 +127,7 @@ Visit: **http://localhost:5173**
 
 ---
 
-## 🗄️ MongoDB Setup
+##  MongoDB Setup
 
 ### Option A — Local MongoDB
 Install [MongoDB Community](https://www.mongodb.com/try/download/community) and run it.
@@ -141,7 +141,7 @@ Your URI: `mongodb://localhost:27017/resume-analyzer`
 
 ---
 
-## 🌐 API Reference
+##  API Reference
 
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
@@ -157,7 +157,7 @@ Authorization: Bearer <your_jwt_token>
 
 ---
 
-## 🔧 Environment Variables
+##  Environment Variables
 
 ### Backend (`backend/.env`)
 ```env
@@ -172,7 +172,7 @@ The frontend proxies `/api` requests to `http://localhost:5000` automatically (c
 
 ---
 
-## 📦 Full Install Commands
+## Full Install Commands
 
 ```bash
 # Backend
@@ -184,7 +184,7 @@ cd frontend && npm install
 
 ---
 
-## 🚀 Running the App
+##  Running the App
 
 ```bash
 # Terminal 1 — Backend
@@ -198,7 +198,7 @@ npm run dev
 
 ---
 
-## 💡 How the AI Works
+##  How the AI Works
 
 1. User uploads a PDF resume
 2. `pdf-parse` extracts the text content
@@ -213,20 +213,20 @@ See `backend/services/geminiService.js` for the full prompt.
 
 ---
 
-## 🎨 UI Features
+##  UI Features
 
-- 🌑 Deep dark theme with purple/blue gradients
-- 💎 Glassmorphism cards (`backdrop-blur`)
-- 🎯 Animated ATS score circle (SVG)
-- 📎 Drag-and-drop file upload
-- 📊 Upload progress bar
-- ⚡ Loading spinners
-- 📱 Fully responsive layout
-- ✨ Slide-in and fade-in animations
+- Deep dark theme with purple/blue gradients
+- Glassmorphism cards (`backdrop-blur`)
+- Animated ATS score circle (SVG)
+- Drag-and-drop file upload
+- Upload progress bar
+- Loading spinners
+- Fully responsive layout
+- Slide-in and fade-in animations
 
 ---
 
-## 🧠 Learning Concepts in This Project
+## Learning Concepts in This Project
 
 | Concept | Where to Find It |
 |---------|-----------------|
@@ -243,6 +243,6 @@ See `backend/services/geminiService.js` for the full prompt.
 
 ---
 
-## 📝 License
+## License
 
 MIT — Free to use for personal projects and portfolios.
