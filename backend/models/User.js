@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
 
-    // Hashed password — NEVER store plain text passwords!
+    // Hashed password 
     // Hashing is done in the auth route before saving
     password: {
       type: String,
