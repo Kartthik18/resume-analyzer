@@ -11,9 +11,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
-// ── Helper: Create a JWT token ────────────────────────
-// The token contains the user's id and email (payload)
-// It expires in 7 days — after that, user must log in again
+// ── Create a JWT token ────────────────────────
+// The token contains the user's id and email 
+// It expires in 7 days — after that the user has to log in again
 const createToken = (user) => {
   return jwt.sign(
     { userId: user._id, email: user.email },
@@ -38,7 +38,7 @@ router.post("/signup", async (req, res) => {
       return res.status(400).json({ message: "Email already registered." });
     }
 
-    // Hash the password before saving (salt rounds = 10 is a good default)
+    // Hash the password before saving (salt rounds = 10)
     // bcrypt.hash() is async and slow by design — makes brute force harder
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -74,14 +74,13 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid email or password." });
     }
 
-    // Compare the plain text password against the stored hash
-    // bcrypt.compare() returns true/false
+    // Compare the plain text password against the stored hash using bcrypt.compare()
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid email or password." });
     }
 
-    // Credentials valid — issue a token
+    // Credentials valid - issue a token
     const token = createToken(user);
 
     res.json({
