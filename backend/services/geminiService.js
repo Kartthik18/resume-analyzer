@@ -7,9 +7,9 @@
 //  3. Sends the prompt to the Gemini API
 //  4. Parses and returns the JSON response
 //
-//  HOW PROMPTING WORKS:
-//  ─────────────────────
-//  We use "prompt engineering" to tell the AI exactly what we want.
+//  Short note on how the prompting process works here:
+//  
+//  We use prompt engineering to tell the AI exactly what we want.
 //  The key technique here is asking the model to respond ONLY in JSON
 //  format so we can reliably parse the response in code.
 //
@@ -28,11 +28,9 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 const MODEL_NAME = "gemini-3.5-flash";
 
-/**
+/*
  * analyzeResume()
- * ───────────────
  * Sends resume text to Gemini and returns structured analysis.
- *
  * @param {string} resumeText - Raw text extracted from the PDF
  * @returns {Object} - Parsed JSON object with ATS score, gaps, bullets, etc.
  */
@@ -40,9 +38,9 @@ const analyzeResume = async (resumeText) => {
   // Get the Gemini model instance
   const model = genAI.getGenerativeModel({ model: MODEL_NAME });
 
-  // ── The Prompt ────────────────────────────────────────
+  // The Prompt: 
   // This is the instruction we send to Gemini.
-  // We clearly define:
+  // We define:
   //   - The AI's role (expert resume reviewer)
   //   - The exact output format (strict JSON)
   //   - Each field we want with a description
@@ -81,12 +79,12 @@ ${resumeText}
 Return ONLY the JSON object. No other text.
 `;
 
-  // ── Send to Gemini ────────────────────────────────────
+  // Send to Gemini 
   const result = await model.generateContent(prompt);
   const response = await result.response;
   const rawText = response.text();
 
-  // ── Parse the Response ────────────────────────────────
+  // Parse the Response
   // Gemini should return raw JSON, but sometimes it wraps it
   // in markdown code blocks. We strip those just in case.
   const cleanedText = rawText
