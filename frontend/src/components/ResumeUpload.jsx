@@ -23,7 +23,7 @@ function ResumeUpload({ onAnalysisComplete }) {
   // Ref to the hidden file input element
   const fileInputRef = useRef(null);
 
-  // ── File Validation ─────────────────────────────────
+  // ile Validation
   const validateFile = (file) => {
     if (!file) return "No file selected.";
     if (file.type !== "application/pdf") return "Only PDF files are accepted.";
@@ -31,7 +31,7 @@ function ResumeUpload({ onAnalysisComplete }) {
     return null; // null = no error
   };
 
-  // ── Handle File Selection (click or drop) ───────────
+  // Handle File Selection (click or drop)
   const handleFile = (file) => {
     const validationError = validateFile(file);
     if (validationError) {
@@ -43,7 +43,7 @@ function ResumeUpload({ onAnalysisComplete }) {
     setSelectedFile(file);
   };
 
-  // ── Drag & Drop Event Handlers ──────────────────────
+  // Drag & Drop Event Handlers 
   const handleDragOver = (e) => {
     e.preventDefault(); // Required to allow dropping
     setIsDragging(true);
@@ -58,12 +58,12 @@ function ResumeUpload({ onAnalysisComplete }) {
     handleFile(file);
   };
 
-  // ── Input Change (file browser) ─────────────────────
+  // Input Change (file browser)
   const handleInputChange = (e) => {
     handleFile(e.target.files[0]);
   };
 
-  // ── Upload + Analyze ────────────────────────────────
+  // Upload + Analyze 
   const handleUpload = async () => {
     if (!selectedFile) return;
 
@@ -75,7 +75,7 @@ function ResumeUpload({ onAnalysisComplete }) {
       // Get the JWT token from localStorage to send in headers
       const token = localStorage.getItem("token");
 
-      // Build a FormData object — required for file uploads (multipart/form-data)
+      // Build a FormData object- required for file uploads (multipart/form-data)
       const formData = new FormData();
       formData.append("resume", selectedFile); // "resume" matches multer's field name
 
@@ -107,7 +107,7 @@ function ResumeUpload({ onAnalysisComplete }) {
     }
   };
 
-  // ── Render ──────────────────────────────────────────
+  // Render 
   return (
     <div className="glass-card p-8 animate-slide-up">
       <h2 className="text-xl font-bold text-white mb-2">Analyze Your Resume</h2>
