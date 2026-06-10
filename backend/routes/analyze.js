@@ -1,9 +1,9 @@
 // ──────────────────────────────────────────────────────
 //  routes/analyze.js  —  Resume Upload, Analysis & History
 //
-//  POST /api/analyze/upload  →  Upload PDF, extract text,
+//  POST /api/analyze/upload  -  Upload PDF, extract text,
 //                               run Gemini analysis, save to DB
-//  GET  /api/analyze/history →  Return all past analyses for user
+//  GET  /api/analyze/history - Return all past analyses for user
 //
 //  Flow for /upload:
 //  1. multer saves the PDF file temporarily
@@ -24,7 +24,7 @@ const Resume = require("../models/Resume");
 const { analyzeResume } = require("../services/geminiService");
 
 // ── Multer Configuration ──────────────────────────────
-// multer handles multipart/form-data (file uploads)
+// multer handles multipart/form-data(file uploads)
 // diskStorage saves the file to the /uploads folder
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -59,11 +59,11 @@ router.post("/upload", authMiddleware, upload.single("resume"), async (req, res)
       return res.status(400).json({ message: "Please upload a PDF file." });
     }
 
-    // Step 1: Read the saved PDF file as a buffer
+    // Read the saved PDF file as a buffer
     const filePath = req.file.path;
     const pdfBuffer = fs.readFileSync(filePath);
 
-    // Step 2: Extract plain text from the PDF
+    // Extract plain text from the PDF
     // pdf-parse reads the binary buffer and returns { text, numpages, ... }
     const pdfData = await pdfParse(pdfBuffer);
     const extractedText = pdfData.text;
@@ -72,11 +72,11 @@ router.post("/upload", authMiddleware, upload.single("resume"), async (req, res)
       return res.status(400).json({ message: "Could not extract enough text from the PDF. Make sure it's not a scanned image." });
     }
 
-    // Step 3: Send extracted text to Gemini for analysis
+    // Send extracted text to Gemini for analysis
     // This calls our geminiService which returns a structured JSON object
     const analysis = await analyzeResume(extractedText);
 
-    // Step 4: Save everything to MongoDB
+    // Save everything to MongoDB
     const savedResume = await Resume.create({
       userId: req.user.userId,      // from the JWT token (set by authMiddleware)
       fileName: req.file.originalname,
@@ -84,10 +84,10 @@ router.post("/upload", authMiddleware, upload.single("resume"), async (req, res)
       analysis,
     });
 
-    // Step 5: Clean up the temporary PDF file from disk
+    // Clean up the temporary PDF file from disk
     fs.unlinkSync(filePath);
 
-    // Return the full analysis + document ID to the frontend
+    // Return the full analysis & document ID to the frontend
     res.status(201).json({
       message: "Resume analyzed successfully!",
       resumeId: savedResume._id,
@@ -103,12 +103,12 @@ router.post("/upload", authMiddleware, upload.single("resume"), async (req, res)
 
 // ── GET /api/analyze/history ──────────────────────────
 // Returns all past resume analyses for the logged-in user
-// Sorted by newest first, and we exclude the large extractedText field
+// Sorted by newest first, and dont select the big "extractedText" field
 router.get("/history", authMiddleware, async (req, res) => {
   try {
     const analyses = await Resume.find({ userId: req.user.userId })
-      .select("-extractedText")   // Don't send the full text back — saves bandwidth
-      .sort({ createdAt: -1 });   // Newest first
+      .select("-extractedText")   
+      .sort({ createdAt: -1 });  
 
     res.json(analyses);
   } catch (err) {
