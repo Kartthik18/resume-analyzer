@@ -12,7 +12,7 @@
 
 import React, { useState } from "react";
 
-// ── ATS Score Circle ────────────────────────────────────
+// ATS Score Circle 
 // An SVG-based circular progress indicator
 function ScoreCircle({ score }) {
   const radius = 54;
@@ -54,7 +54,7 @@ function ScoreCircle({ score }) {
   );
 }
 
-// ── Section Component ────────────────────────────────────
+// Section Component
 // Reusable section with a title, icon, and colored items
 function Section({ icon, title, items, badgeClass, numbered = false }) {
   if (!items || items.length === 0) return null;
@@ -79,7 +79,7 @@ function Section({ icon, title, items, badgeClass, numbered = false }) {
   );
 }
 
-// ── Tag Cloud Component ──────────────────────────────────
+// Tag Cloud Component 
 // Renders items as pill/badge tags (for keywords, skill gaps)
 function TagCloud({ icon, title, items, badgeClass }) {
   if (!items || items.length === 0) return null;
@@ -97,7 +97,7 @@ function TagCloud({ icon, title, items, badgeClass }) {
   );
 }
 
-// ── Main AnalysisCard ────────────────────────────────────
+// Main AnalysisCard
 function AnalysisCard({ analysis, fileName, createdAt }) {
   const [expanded, setExpanded] = useState(true);
 
