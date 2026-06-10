@@ -1,6 +1,6 @@
 // ──────────────────────────────────────────────────────
-//  server.js  —  Main entry point for the Express backend
-//  This file wires together: Express, MongoDB, and routes
+//  server.js  —  This is the main entry point for the Express backend
+//  This file wires Express, MongoDB, and routes together
 // ──────────────────────────────────────────────────────
 
 const express = require("express");
@@ -26,20 +26,20 @@ app.use(express.json());
 // Serve uploaded files statically (optional, for debugging)
 app.use("/uploads", express.static("uploads"));
 
-// ── Routes ────────────────────────────────────────────
+// Routes
 // Auth routes: /api/auth/signup  and  /api/auth/login
 app.use("/api/auth", require("./routes/auth"));
 
 // Analyze routes: /api/analyze/upload  and  /api/analyze/history
 app.use("/api/analyze", require("./routes/analyze"));
 
-// ── Health Check ──────────────────────────────────────
+// Health Check
 // Simple route to verify the server is running
 app.get("/", (req, res) => {
-  res.json({ message: "AI Resume Analyzer API is running ✅" });
+  res.json({ message: "AI Resume Analyzer API is running" });
 });
 
-// ── MongoDB Connection ────────────────────────────────
+// MongoDB Connection 
 // Connect to MongoDB, then start the server
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
@@ -47,13 +47,13 @@ const MONGO_URI = process.env.MONGO_URI;
 mongoose
   .connect(MONGO_URI)
   .then(() => {
-    console.log("✅ MongoDB connected successfully");
+    console.log("MongoDB connected successfully");
     // Only start listening after DB is connected
     app.listen(PORT, () => {
-      console.log(`🚀 Server running at http://localhost:${PORT}`);
+      console.log(`Server running at http://localhost:${PORT}`);
     });
   })
   .catch((err) => {
-    console.error("❌ MongoDB connection failed:", err.message);
+    console.error("MongoDB connection failed:", err.message);
     process.exit(1); // Exit the process if DB fails
   });
